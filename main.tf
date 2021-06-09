@@ -63,6 +63,11 @@ resource "aws_eip_association" "eip_assoc" {
   instance_id = aws_instance.myInstance.id
   allocation_id = aws_eip.midnightEIP.id
 }
+## Getting my public Ip address
+
+data "http" "myIP" {
+  url = "http://ipv4.icanhazip.com"
+}
 
 ## Security group
 resource "aws_security_group" "midnightSG" {
@@ -79,12 +84,12 @@ resource "aws_security_group" "midnightSG" {
     
   }
   ingress {
-    description      = "Allow SSH From anywhere"
+    description      = "Allow SSH From my IP and the EIP "
     from_port        = 22
     to_port          = 22
     protocol         = "tcp"
-    cidr_blocks      = ["0.0.0.0/0"]
-    ipv6_cidr_blocks = ["::/0"]
+    cidr_blocks      = ["${aws_eip.midnightEIP.public_ip}/32", "${chomp(data.http.myIP.body)}/32"]
+   
     
   }
 
