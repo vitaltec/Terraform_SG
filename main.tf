@@ -71,7 +71,7 @@ resource "aws_security_group" "midnightSG" {
   vpc_id = aws_vpc.midnightVPC.id
 
   ingress {
-    description      = "Allow HTTP"
+    description      = "Allow HTTP Only From The EIP"
     from_port        = 80
     to_port          = 80
     protocol         = "tcp"
@@ -79,7 +79,7 @@ resource "aws_security_group" "midnightSG" {
     
   }
   ingress {
-    description      = "Allow SSH"
+    description      = "Allow SSH From anywhere"
     from_port        = 22
     to_port          = 22
     protocol         = "tcp"
