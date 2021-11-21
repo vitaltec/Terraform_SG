@@ -58,6 +58,7 @@ resource "aws_eip" "midnightEIP" {
   
 }
 
+
 ## EIP association
 resource "aws_eip_association" "eip_assoc" {
   instance_id = aws_instance.myInstance.id
