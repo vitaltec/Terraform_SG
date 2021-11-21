@@ -1,7 +1,7 @@
 provider "aws" {
  region = "us-east-1" 
 }
-
+# adding more resourece to this file 
 ## VPC
 resource "aws_vpc" "midnightVPC" {
   cidr_block = var.midnightVPCCidr
